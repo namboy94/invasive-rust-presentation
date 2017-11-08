@@ -4,13 +4,111 @@
   breaklines=true,
   basicstyle=\ttfamily\color{black},
   moredelim=**[is][\color{darkred}]{@}{@},
-  moredelim=**[is][\color{darkblue}]{()}{()},
-  moredelim=**[is][\color{darkgreen}]{--}{--},
+  moredelim=**[is][\color{darkblue}]{***}{***},
 }
 
 
 \lstset{showstringspaces=true,columns=fullflexible,keepspaces=true}
 
-\begin{frame}[fragile]{Rust - Referenzen - Beispiel}
+\begin{frame}[fragile]{Rust - Beispiel 2}
+
+  %_____________________________________________________________________________
+
+  \begin{onlyenv}<1> {
+    \begin{lstlisting}[frame=single,style=base]
+      fn g(s: &String) { ... }
+      fn h(s: &mut String) { ... }
+      ...
+        let mut x = String::from("Hello World!");
+
+
+
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<2> {
+    \begin{lstlisting}[frame=single,style=base]
+      fn g(s: &String) { ... }
+      ...
+        let mut x = String::from("Hello World!");
+        let x_ref1 = &x;
+
+
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<3> {
+    \begin{lstlisting}[frame=single,style=base]
+      fn g(s: &String) { ... }
+      ...
+        let mut x = String::from("Hello World!");
+        let x_ref1 = &x;
+        let x_ref2 = &x;
+
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<4> {
+    \begin{lstlisting}[frame=single,style=base]
+      fn g(s: &String) { ... }
+      ...
+        let mut x = String::from("Hello World!");
+        let x_ref1 = &mut x;
+        let x_ref2 = &x;
+
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<5> {
+    \begin{lstlisting}[frame=single,style=base]
+      fn g(s: &String) { ... }
+      ...
+        let mut x = String::from("Hello World!");
+        let x_ref1 = &mut x;
+        @let x_ref2 = &mut x;@
+
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  \begin{onlyenv}<1-2,4> {
+    \begin{lstlisting}[frame=single,style=base]
+      
+
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %_____________________________________________________________________________
+
+  \begin{onlyenv}<1-2,4> {
+    \begin{lstlisting}[frame=single,style=base]
+
+
+    \end{lstlisting}
+  }
+  \end{onlyenv}
 
 \end{frame}

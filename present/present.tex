@@ -94,37 +94,15 @@
         \item Retreat - Ressourcen freigeben 
       \end{enumerate}
     \item OctoPOS und iRTSS bieten Software-Grundlage
-    \item Angepasste Hardware um invasive Grundfunktionen zu unterstützen
+    \item Unterstützung der Programmiersprachen C, C++ und X10
   \end{itemize}
   
-\end{frame}
-
-\begin{frame}{SPARC LEON}
-
-    \begin{itemize}
-      \item SPARC
-        \begin{itemize}
-          \item Skalierbare Prozessorarchitektur
-        \end{itemize}
-      \item SPARC-V8
-        \begin{itemize}
-          \item Basierend auf SPARC
-          \item 32-bit Architektur
-        \end{itemize}
-      \item LEON
-        \begin{itemize}
-          \item SPARC-V8 basierte Prozessorfamilie
-          \item Konfigurierbare, Open-Source VHDL Designs
-          \item Geeignet für den Einsatz in angepassten ASICs, SOCS und FPGAs
-        \end{itemize}
-    \end{itemize}
-
 \end{frame}
 
 \begin{frame}{Rust - Motivation}
     \begin{itemize}
       \item Sichere Speicherzugriffe
-      \item Effiziente und sicherere Parallelberechnung
+      \item Effiziente und weniger fehleranfällige Parallelberechnung
       \item Konzeptionell an C-artige Sprachen angelehnt
       \item Höhere Abstraktionen, um den Einstieg zu erleichtern
       \item Speichersicherheit und Abstraktionen sollen nicht
@@ -144,7 +122,7 @@
       \item Move-Semantik
       \begin{itemize}
           \item Ownership kann auf andere Variablen übertragen werden
-          \item Ursprüngliche Variable ist nach einem Move nicht mehr verwendbar
+          \item Ursprüngliche Variable ist nach einem "`Move"' nicht mehr verwendbar
         \end{itemize}
       \item Referenzen
         \begin{itemize}
@@ -156,9 +134,8 @@
 
 \end{frame}
 
-\input{ownership-ex.tex}
 \input{move-ex.tex}
-%\input{borrow-ex.tex}
+\input{borrow-ex.tex}
 
 \begin{frame}{Rust - Traits}
 
@@ -168,26 +145,14 @@
     \item Drop
       \begin{itemize}
         \item Destruktor
-        \item drop()-Methode wird beim verlassen des Geltungsbereichs aufgerufen
+        \item drop()-Methode wird beim Verlassen des Geltungsbereichs aufgerufen
       \end{itemize}
     \item Copy
       \begin{itemize}
         \item Erlaubt Copy-Semantik statt Move-Semantik
-        \item Jedes mal, wenn ein Move geschehen würde, stattdessen bitweise Kopie
+        \item Jedes mal, wenn ein Move geschehen würde, wird eine bitweise Kopie ausgeführt
+        \item Primitve Datentypen wie i32 implementieren dieses Trait
       \end{itemize}
-  \end{itemize}
-\end{frame}
-
-
-\begin{frame}{Rust - SPARC}
-
-  Evtl rauslassen.
-
-  \begin{itemize}
-    \item nostd
-    \item JSON
-    \item libcore
-    \item Cargo
   \end{itemize}
 \end{frame}
 
@@ -195,8 +160,7 @@
 
   \begin{itemize}
     \item Hilfsprogramm zum Kompilieren von invasiven Rust-Programmen
-    \item Kompilierung von \textbf{.rs}-Dateien und Cargo-Projekten
-    \item Unterstützung von SPARC-V8
+    \item Unetrstützt die SPARC-V8 Architektur
     \item Automatische Verlinkung mit iRTSS/OctoPOS
     \item ca. 650 Zeilen Code (Python)
   \end{itemize}
@@ -205,31 +169,21 @@
 
 \begin{frame}{octolib}
     \begin{itemize}
+      \item Bibliothek mit invasiven Strukturen und Funktionen
       \item Direkte C-Rust Bindings
-      \item Rust-spezifische Änderungen
+      \item Rust-spezifische Anpassungen
       \item ca. 750 Zeilen Code (Rust)
     \end{itemize}
 \end{frame}
 
-\begin{frame}{octolib - Rust Bindings}
-  \begin{itemize}
-    \item Beispiel C Funktion zu Rust Funktion
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{octolib - Rust Improvements}
-    \begin{itemize}
-      \item AgentClaim
-      \item Closures
-    \end{itemize}
-\end{frame}
+\input{rust-c-bindings.tex}
+\input{invasive-example.tex}
 
 \begin{frame}{Evaluation}
     \begin{itemize}
-      \item temci
-      \item 50-mal
-      \item Intel i5...
-      \item Benchmarks
+      \item Wiederholte Laufzeitmessungen
+      \item Betrachtung von Programmen mit und ohner Compiler-Optimierungen
+      \item Unterschiedliche Programme
         \begin{itemize}
           \item Kompilierungsdauer
           \item Anlaufzeit
@@ -280,17 +234,32 @@
 \end{frame}
 
 \begin{frame}{Vielen Dank für ihre Aufmerksamkeit!}
-
-  \begin{itemize}
-    \item 4 Wichtigste Folien:
-    \begin{itemize}
-      \item Invasives Rechnen
-      \item Ownership, Move-Semantik, Referenzen
-      \item Traits
-      \item octolib
-    \end{itemize}
-  \end{itemize}
-  
+  \begin{columns}[t]
+    \column{.5\textwidth}
+    \centering
+    \includegraphics[width=5cm,height=3.5cm]{images/garbage-eval.pdf}\\
+    \includegraphics[width=5cm,height=3.5cm]{images/garbage-eval.pdf}
+    \column{.5\textwidth}
+    \centering
+    \includegraphics[width=5cm,height=3.5cm]{images/garbage-eval.pdf}\\
+    \includegraphics[width=5cm,height=3.5cm]{images/garbage-eval.pdf}
+  \end{columns}
 \end{frame}
 
 \end{document}
+
+% {
+% Roten Faden
+% AgentClaim etc zum ersten Beispiel zurückführen
+% Rust Invasiv Code Beispiel
+% }
+
+% Affine Typen
+
+% Erstes Rust Beispiel raus
+
+% Dependent types (Kann als Frage vorkommen) -X10 het's, Rust nicth, was verliert man dadurch?
+% In X10 nur halbherzig implementiert, werden kaum benutzt
+% RFC 200 Rust
+
+% 15:45 Montag, 13. November

@@ -1,0 +1,32 @@
+\lstdefinestyle{base}{
+  language=C,
+  emptylines=100,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{darkgreen}]{@}{@},
+}
+
+
+\lstset{showstringspaces=true,columns=fullflexible,keepspaces=true}
+
+\begin{frame}[fragile]{Beispiel eines invasiven Rust-Programms}
+
+  \begin{onlyenv}<1> {
+    \begin{lstlisting}[frame=single,style=base]
+      pub extern "C" fn rust_main_ilet (tile_id: u8) { // TODO Check tile_id name
+        @//Invade
+        let constraints = Constraints::new(4, 8);
+        let claim = AgentClaim::new(constraints);@
+
+        //Infect
+        let ilet_fn = |param: *mut c_void| {
+            print("Hello World!\n\0");
+        }
+        claim.infect(ilet_fn, None);
+
+      } // Retreat & Shutdown
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+\end{frame}

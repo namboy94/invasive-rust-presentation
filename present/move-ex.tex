@@ -10,17 +10,17 @@
 
 \lstset{showstringspaces=true,columns=fullflexible,keepspaces=true}
 
-\begin{frame}[fragile]{Rust - Move-Semantik - Beispiel}
-
-  \only<1>{Owner: \textcolor{darkred}{a}}
-  \only<2->{Owner: \textcolor{darkred}{b}}
+\begin{frame}[fragile]{Rust - Beispiel}
 
   %_____________________________________________________________________________
 
   \begin{onlyenv}<1> {
     \begin{lstlisting}[frame=single,style=base]
+      fn f(s: String) { ... }
       ...
-      let @a@ = String::from("Hello World!");
+        let a = String::from("Hello World!");
+
+
 
 
       ...
@@ -32,9 +32,12 @@
 
   \begin{onlyenv}<2> {
     \begin{lstlisting}[frame=single,style=base]
+      fn f(s: String) { ... }
       ...
-      let @a@ = String::from("Hello World!");
-      let @b@ = a;
+        let a = String::from("Hello World!");
+        let b = a;
+
+
 
       ...
     \end{lstlisting}
@@ -45,10 +48,13 @@
 
   \begin{onlyenv}<3> {
     \begin{lstlisting}[frame=single,style=base]
+      fn f(s: String) { ... }
       ...
-      let @a@ = String::from("Hello World!");
-      let @b@ = a;
-      println!("{}", a);
+        let a = String::from("Hello World!");
+        let b = a;
+        @f(a);@
+
+
       ...
     \end{lstlisting}
   }
@@ -56,15 +62,55 @@
 
   \begin{onlyenv}<3> {
     \begin{lstlisting}[frame=single,style=base]
-      error[E0382]:
+      @error[E0382]@:
       use of moved value: `a`
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<4> {
+    \begin{lstlisting}[frame=single,style=base]
+      fn f(s: String) { ... }
+      ...
+        let a = String::from("Hello World!");
+        let b = a;
+        f(b);
+
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<5> {
+    \begin{lstlisting}[frame=single,style=base]
+      fn f(s: String) { ... }
+      ...
+        let a = String::from("Hello World!");
+        let b = a;
+        f(b);
+        @f(b);@
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  \begin{onlyenv}<5> {
+    \begin{lstlisting}[frame=single,style=base]
+      @error[E0382]@:
+      use of moved value: `b`
     \end{lstlisting}
   }
   \end{onlyenv}
 
   %_____________________________________________________________________________
 
-  \begin{onlyenv}<1-2> {
+  \begin{onlyenv}<1-2,4> {
     \begin{lstlisting}[frame=single,style=base]
 
 

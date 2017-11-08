@@ -10,16 +10,16 @@
 
 \lstset{showstringspaces=true,columns=fullflexible,keepspaces=true}
 
-\begin{frame}[fragile]{Rust - Ownership - Beispiel}
-
-  \only<1->{Owner: \textcolor{darkred}{a}}
+\begin{frame}[fragile]{Rust - Beispiel}
 
   %_____________________________________________________________________________
 
   \begin{onlyenv}<1> {
     \begin{lstlisting}[frame=single,style=base]
+      fn f(s: String) { ... }
       ...
-      let @a@ = String::from("Hello World!");
+        let a = String::from("Hello World!");
+
 
 
 
@@ -32,20 +32,14 @@
 
   \begin{onlyenv}<2> {
     \begin{lstlisting}[frame=single,style=base]
+      fn f(s: String) { ... }
       ...
-      let @a@ = String::from("Hello World!");
-      println!(@a@);
+        let a = String::from("Hello World!");
+        let b = a;
+
 
 
       ...
-    \end{lstlisting}
-  }
-  \end{onlyenv}
-
-  \begin{onlyenv}<2,3> {
-    \begin{lstlisting}[frame=single,style=base]
-      Hello World!
-
     \end{lstlisting}
   }
   \end{onlyenv}
@@ -54,12 +48,22 @@
 
   \begin{onlyenv}<3> {
     \begin{lstlisting}[frame=single,style=base]
+      fn f(s: String) { ... }
       ...
-      let @a@ = String::from("Hello World!");
-      println!(@a@);
-      { let ***b*** = String::from("Hallo Welt!"); }
+        let a = String::from("Hello World!");
+        let b = a;
+        @f(a);@
+
 
       ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  \begin{onlyenv}<3> {
+    \begin{lstlisting}[frame=single,style=base]
+      @error[E0382]@:
+      use of moved value: `a`
     \end{lstlisting}
   }
   \end{onlyenv}
@@ -68,27 +72,45 @@
 
   \begin{onlyenv}<4> {
     \begin{lstlisting}[frame=single,style=base]
+      fn f(s: String) { ... }
       ...
-      let @a@ = String::from("Hello World!");
-      println!(@a@);
-      { let ***b*** = String::from("Hallo Welt!"); }
-      println!(b);
+        let a = String::from("Hello World!");
+        let b = a;
+        f(b);
+
+
       ...
     \end{lstlisting}
   }
   \end{onlyenv}
 
-  \begin{onlyenv}<4> {
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<5> {
     \begin{lstlisting}[frame=single,style=base]
-      error[E0425]:
-      cannot find value `b` in this scope
+      fn f(s: String) { ... }
+      ...
+        let a = String::from("Hello World!");
+        let b = a;
+        f(b);
+        @f(b);@
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  \begin{onlyenv}<5> {
+    \begin{lstlisting}[frame=single,style=base]
+      @error[E0382]@:
+      use of moved value: `b`
     \end{lstlisting}
   }
   \end{onlyenv}
 
   %_____________________________________________________________________________
 
-  \begin{onlyenv}<1> {
+  \begin{onlyenv}<1-2,4> {
     \begin{lstlisting}[frame=single,style=base]
 
 
