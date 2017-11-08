@@ -8,6 +8,7 @@
 \usepackage{mathtools}
 \usepackage[normalem]{ulem}
 \usepackage{graphicx}
+\usepackage{listings}
 
 \usepackage{xcolor}
 \definecolor{darkblue}{RGB}{0,0,200}
@@ -131,45 +132,63 @@
     \end{itemize}
 \end{frame}
 
-\begin{frame}{Rust - Ownership}
-    
-    Das zentrale Alleinstellungsmerkmal der Programmiersprache
+\begin{frame}{Rust - Ownership, Move-Semantik und Referenzen}
 
     \begin{itemize}
-      \item Jeder Speicherbereich wird nur einer einzigen Variable zur Verfügung gestellt
-      \item Beim Verlassen des Geltungsbereichs wird der Speicherbereich freigegeben
-    \end{itemize}
-
-\end{frame}
-
-\begin{frame}{Rust - Move-Semantik und Referenzen}
-    
-
-    \begin{itemize}
-      \item Move-Semantik
+      \item Ownership
         \begin{itemize}
-          \item Move
+          \item Das zentrale Alleinstellungsmerkmal der Programmiersprache
+          \item Jeder Speicherbereich wird nur einer einzigen Variable zur Verfügung gestellt
+          \item Beim Verlassen des Geltungsbereichs wird der Speicherbereich freigegeben
+        \end{itemize}
+      \item Move-Semantik
+      \begin{itemize}
+          \item Ownership kann auf andere Variablen übertragen werden
+          \item Ursprüngliche Variable ist nach einem Move nicht mehr verwendbar
         \end{itemize}
       \item Referenzen
         \begin{itemize}
-          \item Ref
-          \item mut Ref
+          \item Unendliche unveränderliche Referenzen
+          \item Nur eine veränderliche Referenz
+          \item Move einer Variable nicht möglich wenn Referenzen existieren
         \end{itemize}
     \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Rust - Ownership - Beispiel}
-  Beispiel aus thesis, Colour-coded, step-by step
+\input{ownership-ex.tex}
+\input{move-ex.tex}
+%\input{borrow-ex.tex}
+
+\begin{frame}{Rust - Traits}
+
+  \begin{itemize}
+    \item Wie Interfaces in anderen Sprachen
+    \item Können Verhalten bezüglich Ownership und Move-Semantik beeinflussen
+    \item Drop
+      \begin{itemize}
+        \item Destruktor
+        \item drop()-Methode wird beim verlassen des Geltungsbereichs aufgerufen
+      \end{itemize}
+    \item Copy
+      \begin{itemize}
+        \item Erlaubt Copy-Semantik statt Move-Semantik
+        \item Jedes mal, wenn ein Move geschehen würde, stattdessen bitweise Kopie
+      \end{itemize}
+  \end{itemize}
 \end{frame}
+
 
 \begin{frame}{Rust - SPARC}
 
+  Evtl rauslassen.
 
-    nostd
-    JSON
-    libcore
-    Cargo
+  \begin{itemize}
+    \item nostd
+    \item JSON
+    \item libcore
+    \item Cargo
+  \end{itemize}
 \end{frame}
 
 \begin{frame}{octorust}
@@ -213,6 +232,7 @@
       \item Benchmarks
         \begin{itemize}
           \item Kompilierungsdauer
+          \item Anlaufzeit
           \item Parallele Primzahlenberechnung
           \item Allokation von Objekten
         \end{itemize}
@@ -220,6 +240,15 @@
 \end{frame}
 
 \begin{frame}{Kompilierungsdauer}
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{images/compile-eval.pdf}
+  \end{center}
+  \begin{itemize}
+    \item X10 langsam
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Anlaufzeit}
   \begin{center}
     \includegraphics[width=0.6\textwidth]{images/compile-eval.pdf}
   \end{center}
@@ -250,16 +279,18 @@
 \begin{frame}{Zusammenfassung und Fazit}
 \end{frame}
 
-\begin{frame}{Fragen?}
-    4 Wichtigste Folien:
-    
-    invasive computing
-    
-    ownership - beispiel
-    
-    structs etc
-    
-    octolib - improvements
+\begin{frame}{Vielen Dank für ihre Aufmerksamkeit!}
+
+  \begin{itemize}
+    \item 4 Wichtigste Folien:
+    \begin{itemize}
+      \item Invasives Rechnen
+      \item Ownership, Move-Semantik, Referenzen
+      \item Traits
+      \item octolib
+    \end{itemize}
+  \end{itemize}
+  
 \end{frame}
 
 \end{document}

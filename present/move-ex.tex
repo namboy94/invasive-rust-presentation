@@ -1,0 +1,75 @@
+\lstdefinestyle{base}{
+  language=C,
+  emptylines=100,
+  breaklines=true,
+  basicstyle=\ttfamily\color{black},
+  moredelim=**[is][\color{darkred}]{@}{@},
+  moredelim=**[is][\color{darkblue}]{***}{***},
+}
+
+
+\lstset{showstringspaces=true,columns=fullflexible,keepspaces=true}
+
+\begin{frame}[fragile]{Rust - Move-Semantik - Beispiel}
+
+  \only<1>{Owner: \textcolor{darkred}{a}}
+  \only<2->{Owner: \textcolor{darkred}{b}}
+
+  %_____________________________________________________________________________
+
+  \begin{onlyenv}<1> {
+    \begin{lstlisting}[frame=single,style=base]
+      ...
+      let @a@ = String::from("Hello World!");
+
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<2> {
+    \begin{lstlisting}[frame=single,style=base]
+      ...
+      let @a@ = String::from("Hello World!");
+      let @b@ = a;
+
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<3> {
+    \begin{lstlisting}[frame=single,style=base]
+      ...
+      let @a@ = String::from("Hello World!");
+      let @b@ = a;
+      println!("{}", a);
+      ...
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  \begin{onlyenv}<3> {
+    \begin{lstlisting}[frame=single,style=base]
+      error[E0382]:
+      use of moved value: `a`
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %_____________________________________________________________________________
+
+  \begin{onlyenv}<1-2> {
+    \begin{lstlisting}[frame=single,style=base]
+
+
+    \end{lstlisting}
+  }
+  \end{onlyenv}
+
+\end{frame}
