@@ -10,7 +10,7 @@
 
 \lstset{showstringspaces=true,columns=fullflexible,keepspaces=true}
 
-\begin{frame}[fragile]{Rust - Beispiel}
+\begin{frame}[fragile]{Ownership und Move-Semantik}
 
   %_____________________________________________________________________________
 
@@ -23,8 +23,7 @@
 
 
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -39,8 +38,7 @@
 
 
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -55,16 +53,14 @@
         @f(a);@
 
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
   \begin{onlyenv}<3> {
     \begin{lstlisting}[frame=single,style=base]
       @error[E0382]@:
-      use of moved value: `a`
-    \end{lstlisting}
+      use of moved value: `a`\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -79,8 +75,7 @@
         f(b);
 
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -95,16 +90,14 @@
         f(b);
         @f(b);@
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
   \begin{onlyenv}<5> {
     \begin{lstlisting}[frame=single,style=base]
       @error[E0382]@:
-      use of moved value: `b`
-    \end{lstlisting}
+      use of moved value: `b`\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -112,7 +105,6 @@
 
   \begin{onlyenv}<1-2,4> {
     \begin{lstlisting}[frame=single,style=base]
-
 
     \end{lstlisting}
   }

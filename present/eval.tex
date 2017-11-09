@@ -1,0 +1,49 @@
+\begin{frame}{Evaluation}
+    \begin{itemize}
+      \item Wiederholte Laufzeitmessungen
+      \item Betrachtung von Programmen mit und ohne Compiler-Optimierungen
+      \item Unterschiedliche Programme
+        \begin{itemize}
+          \item Kompilierungsdauer
+          \item Anlaufzeit
+          \item Parallele Primzahlenberechnung
+          \item Allokation von Objekten
+        \end{itemize}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Kompilierungsdauer}
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{images/compile-eval.pdf}
+  \end{center}
+  \begin{itemize}
+    \item Zeitersparnis beim Kompilieren von Rust-Programmen im Vergleich mit X10-Programmen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Anlaufzeit}
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{images/startup-eval.pdf}
+  \end{center}
+  \begin{itemize}
+    \item Rust und C benötigen ca. 1.5 Sekunden weniger um zu starten
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Parallele Primzahlenberechnung}
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{images/primes-eval.pdf}
+  \end{center}
+  \begin{itemize}
+    \item Rust weist bei Berechnung von Primzahlen keine Leistungsvorteile auf
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Allokation von Objekten}
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{images/garbage-eval.pdf}
+  \end{center}
+  \begin{itemize}
+    \item C und Rust weisen eine mindestens 10-fach bessere Laufzeit als X10 auf
+  \end{itemize}
+\end{frame}

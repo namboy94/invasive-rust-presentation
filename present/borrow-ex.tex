@@ -10,22 +10,20 @@
 
 \lstset{showstringspaces=true,columns=fullflexible,keepspaces=true}
 
-\begin{frame}[fragile]{Rust - Beispiel 2}
+\begin{frame}[fragile]{Referenzen}
 
   %_____________________________________________________________________________
 
   \begin{onlyenv}<1> {
     \begin{lstlisting}[frame=single,style=base]
-      fn g(s: &String) { ... }
-      fn h(s: &mut String) { ... }
+      fn g(s: &mut String) { ... }
       ...
         let mut x = String::from("Hello World!");
 
 
 
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -33,15 +31,14 @@
 
   \begin{onlyenv}<2> {
     \begin{lstlisting}[frame=single,style=base]
-      fn g(s: &String) { ... }
+      fn g(s: &mut String) { ... }
       ...
         let mut x = String::from("Hello World!");
         let x_ref1 = &x;
 
 
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -49,15 +46,21 @@
 
   \begin{onlyenv}<3> {
     \begin{lstlisting}[frame=single,style=base]
-      fn g(s: &String) { ... }
+      fn g(s: &mut String) { ... }
       ...
         let mut x = String::from("Hello World!");
         let x_ref1 = &x;
-        let x_ref2 = &x;
+        @let mut y = x;@
 
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
+  }
+  \end{onlyenv}
+
+  \begin{onlyenv}<3> {
+    \begin{lstlisting}[frame=single,style=base]
+      @error[E0505]@:
+      cannot move out of `x` because it is borrowed\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -65,15 +68,14 @@
 
   \begin{onlyenv}<4> {
     \begin{lstlisting}[frame=single,style=base]
-      fn g(s: &String) { ... }
+      fn g(s: &mut String) { ... }
       ...
         let mut x = String::from("Hello World!");
-        let x_ref1 = &mut x;
+        let x_ref1 = &x;
         let x_ref2 = &x;
 
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -81,31 +83,58 @@
 
   \begin{onlyenv}<5> {
     \begin{lstlisting}[frame=single,style=base]
-      fn g(s: &String) { ... }
+      fn g(s: &mut String) { ... }
+      ...
+        let mut x = String::from("Hello World!");
+        let x_ref1 = &mut x;
+        let x_ref2 = &x;
+
+
+      ...\end{lstlisting}
+  }
+  \end{onlyenv}
+
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<6> {
+    \begin{lstlisting}[frame=single,style=base]
+      fn g(s: &mut String) { ... }
       ...
         let mut x = String::from("Hello World!");
         let x_ref1 = &mut x;
         @let x_ref2 = &mut x;@
 
 
-      ...
-    \end{lstlisting}
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
-  \begin{onlyenv}<1-2,4> {
+  \begin{onlyenv}<6> {
     \begin{lstlisting}[frame=single,style=base]
-      
+      @error[E0499]@:
+      cannot borrow `x` as mutable more than once at a time\end{lstlisting}
+  }
+  \end{onlyenv}
 
-    \end{lstlisting}
+  %-----------------------------------------------------------------------------
+
+  \begin{onlyenv}<7> {
+    \begin{lstlisting}[frame=single,style=base]
+      fn g(s: &mut String) { ... }
+      ...
+        let mut x = String::from("Hello World!");
+        g(&mut x);
+        g(&mut x);
+
+
+      ...\end{lstlisting}
   }
   \end{onlyenv}
 
   %_____________________________________________________________________________
 
-  \begin{onlyenv}<1-2,4> {
+  \begin{onlyenv}<1,2,4,5,7> {
     \begin{lstlisting}[frame=single,style=base]
-
 
     \end{lstlisting}
   }

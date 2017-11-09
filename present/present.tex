@@ -94,6 +94,7 @@
         \item Retreat - Ressourcen freigeben 
       \end{enumerate}
     \item OctoPOS und iRTSS bieten Software-Grundlage
+    \item C-Schnittstelle
     \item Unterstützung der Programmiersprachen C, C++ und X10
   \end{itemize}
   
@@ -101,7 +102,8 @@
 
 \begin{frame}{Rust - Motivation}
     \begin{itemize}
-      \item Sichere Speicherzugriffe
+      \item Sichere Speicherzugriffe ohne Garbage Collector
+      \item Vermeidung undefinierten Verhaltens
       \item Effiziente und weniger fehleranfällige Parallelberechnung
       \item Konzeptionell an C-artige Sprachen angelehnt
       \item Höhere Abstraktionen, um den Einstieg zu erleichtern
@@ -113,18 +115,19 @@
 \begin{frame}{Rust - Ownership, Move-Semantik und Referenzen}
 
     \begin{itemize}
-      \item Ownership
+      \item<1-> Ownership
         \begin{itemize}
           \item Das zentrale Alleinstellungsmerkmal der Programmiersprache
           \item Jeder Speicherbereich wird nur einer einzigen Variable zur Verfügung gestellt
           \item Beim Verlassen des Geltungsbereichs wird der Speicherbereich freigegeben
+          \item => Affine Typen
         \end{itemize}
-      \item Move-Semantik
+      \item<2-> Move-Semantik
       \begin{itemize}
           \item Ownership kann auf andere Variablen übertragen werden
           \item Ursprüngliche Variable ist nach einem "`Move"' nicht mehr verwendbar
         \end{itemize}
-      \item Referenzen
+      \item<3-> Referenzen
         \begin{itemize}
           \item Unendliche unveränderliche Referenzen
           \item Nur eine veränderliche Referenz
@@ -140,18 +143,19 @@
 \begin{frame}{Rust - Traits}
 
   \begin{itemize}
-    \item Wie Interfaces in anderen Sprachen
+    \item Ähneln Interfaces aus anderen Sprachen
     \item Können Verhalten bezüglich Ownership und Move-Semantik beeinflussen
-    \item Drop
+    \item<2-> Drop
       \begin{itemize}
         \item Destruktor
         \item drop()-Methode wird beim Verlassen des Geltungsbereichs aufgerufen
+        \item Verwendung zum Beispiel zur Schließung einer Netzwerkverbindung
       \end{itemize}
-    \item Copy
+    \item<3-> Copy
       \begin{itemize}
         \item Erlaubt Copy-Semantik statt Move-Semantik
         \item Jedes mal, wenn ein Move geschehen würde, wird eine bitweise Kopie ausgeführt
-        \item Primitve Datentypen wie i32 implementieren dieses Trait
+        \item Primitive Datentypen wie i32 implementieren dieses Trait
       \end{itemize}
   \end{itemize}
 \end{frame}
@@ -160,89 +164,65 @@
 
   \begin{itemize}
     \item Hilfsprogramm zum Kompilieren von invasiven Rust-Programmen
-    \item Unetrstützt die SPARC-V8 Architektur
+    \item Unterstützt die x86 und SPARC-V8 Architekturen
     \item Automatische Verlinkung mit iRTSS/OctoPOS
+    \item Automatisches Einbinden von octolib
     \item ca. 650 Zeilen Code (Python)
   \end{itemize}
+
+  \begin{center}
+    \includegraphics[width=0.6\textwidth]{images/octorust.pdf}
+  \end{center}
 
 \end{frame}
 
 \begin{frame}{octolib}
     \begin{itemize}
-      \item Bibliothek mit invasiven Strukturen und Funktionen
+      \item Rust-Bibliothek mit invasiven Strukturen und Funktionen
       \item Direkte C-Rust Bindings
       \item Rust-spezifische Anpassungen
+        \begin{itemize}
+          \item Objektorientierte Constraints
+          \item Verwendung von Closures
+          \item AgentClaim-Struktur
+        \end{itemize}
       \item ca. 750 Zeilen Code (Rust)
     \end{itemize}
 \end{frame}
 
 \input{rust-c-bindings.tex}
 \input{invasive-example.tex}
-
-\begin{frame}{Evaluation}
-    \begin{itemize}
-      \item Wiederholte Laufzeitmessungen
-      \item Betrachtung von Programmen mit und ohner Compiler-Optimierungen
-      \item Unterschiedliche Programme
-        \begin{itemize}
-          \item Kompilierungsdauer
-          \item Anlaufzeit
-          \item Parallele Primzahlenberechnung
-          \item Allokation von Objekten
-        \end{itemize}
-    \end{itemize}
-\end{frame}
-
-\begin{frame}{Kompilierungsdauer}
-  \begin{center}
-    \includegraphics[width=0.6\textwidth]{images/compile-eval.pdf}
-  \end{center}
-  \begin{itemize}
-    \item X10 langsam
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Anlaufzeit}
-  \begin{center}
-    \includegraphics[width=0.6\textwidth]{images/compile-eval.pdf}
-  \end{center}
-  \begin{itemize}
-    \item X10 langsam
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Parallele Primzahlenberechnung}
-  \begin{center}
-    \includegraphics[width=0.6\textwidth]{images/primes-eval.pdf}
-  \end{center}
-  \begin{itemize}
-    \item Rust langsam
-  \end{itemize}
-\end{frame}
-
-\begin{frame}{Allokation von Objekten}
-  \begin{center}
-    \includegraphics[width=0.6\textwidth]{images/garbage-eval.pdf}
-  \end{center}
-  \begin{itemize}
-    \item X10 langsam
-  \end{itemize}
-\end{frame}
+\input{eval.tex}
 
 
 \begin{frame}{Zusammenfassung und Fazit}
+
+  \begin{itemize}
+    \item Mithilfe des invasiven Rechnens kann ressourcenbewusst programmiert werden
+    \item Rust bietet Speichersicherheit ohne Garbage Collector
+    \item Rust weist in speicherintensiven Szenarien bessere Laufzeiten als X10 auf
+    \item Im Gegensatz zu C verhindert Rust undefiniertes Verhalten
+  \end{itemize}
+
 \end{frame}
 
 \begin{frame}{Vielen Dank für ihre Aufmerksamkeit!}
   \begin{columns}[t]
-    \column{.5\textwidth}
-    \centering
-    \includegraphics[width=5cm,height=3.5cm]{images/garbage-eval.pdf}\\
-    \includegraphics[width=5cm,height=3.5cm]{images/garbage-eval.pdf}
-    \column{.5\textwidth}
-    \centering
-    \includegraphics[width=5cm,height=3.5cm]{images/garbage-eval.pdf}\\
-    \includegraphics[width=5cm,height=3.5cm]{images/garbage-eval.pdf}
+    % convert -density 150 present.pdf -quality 90 build/output.png
+    % Befehl vor make ausführen
+    \column{.1\textwidth}
+
+    \column{.4\textwidth}
+      \centering
+      \includegraphics[width=5cm,height=3.5cm]{build/output-6.png}
+      \includegraphics[width=5cm,height=3.5cm]{build/output-48.png}
+
+    \column{.4\textwidth}
+      \centering
+      \includegraphics[width=5cm,height=3.5cm]{build/output-10.png}
+      \includegraphics[width=5cm,height=3.5cm]{build/output-55.png}
+
+    \column{.1\textwidth}
   \end{columns}
 \end{frame}
 

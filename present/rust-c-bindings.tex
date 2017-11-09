@@ -3,117 +3,50 @@
   emptylines=100,
   breaklines=true,
   basicstyle=\ttfamily\color{black},
-  moredelim=**[is][\color{darkred}]{@}{@},
-  moredelim=**[is][\color{darkblue}]{***}{***},
+  moredelim=**[is][\color{darkgreen}]{@}{@},
 }
 
 
 \lstset{showstringspaces=true,columns=fullflexible,keepspaces=true}
 
-\begin{frame}[fragile]{Rust - Beispiel}
+\begin{frame}[fragile]{Rust Bindings zur OctoPOS/iRTSS C-Schnittstelle}
 
-  %_____________________________________________________________________________
+  \begin{lstlisting}[frame=single,style=base]
+    uint32_t get_value(void *data)
+  \end{lstlisting}
 
   \begin{onlyenv}<1> {
     \begin{lstlisting}[frame=single,style=base]
-      fn f(s: String) { ... }
-      ...
-        let a = String::from("Hello World!");
+      @extern crate libc;@
+      @use libc::c_void;@
 
 
 
 
-      ...
     \end{lstlisting}
   }
   \end{onlyenv}
-
-  %-----------------------------------------------------------------------------
 
   \begin{onlyenv}<2> {
     \begin{lstlisting}[frame=single,style=base]
-      fn f(s: String) { ... }
-      ...
-        let a = String::from("Hello World!");
-        let b = a;
+      extern crate libc;
+      use libc::c_void;
 
+      @extern "C" {
 
-
-      ...
-    \end{lstlisting}
-  }
-  \end{onlyenv}
-
-  %-----------------------------------------------------------------------------
-
-  \begin{onlyenv}<3> {
-    \begin{lstlisting}[frame=single,style=base]
-      fn f(s: String) { ... }
-      ...
-        let a = String::from("Hello World!");
-        let b = a;
-        @f(a);@
-
-
-      ...
+      }@
     \end{lstlisting}
   }
   \end{onlyenv}
 
   \begin{onlyenv}<3> {
     \begin{lstlisting}[frame=single,style=base]
-      @error[E0382]@:
-      use of moved value: `a`
-    \end{lstlisting}
-  }
-  \end{onlyenv}
+      extern crate libc;
+      use libc::c_void;
 
-  %-----------------------------------------------------------------------------
-
-  \begin{onlyenv}<4> {
-    \begin{lstlisting}[frame=single,style=base]
-      fn f(s: String) { ... }
-      ...
-        let a = String::from("Hello World!");
-        let b = a;
-        f(b);
-
-
-      ...
-    \end{lstlisting}
-  }
-  \end{onlyenv}
-
-  %-----------------------------------------------------------------------------
-
-  \begin{onlyenv}<5> {
-    \begin{lstlisting}[frame=single,style=base]
-      fn f(s: String) { ... }
-      ...
-        let a = String::from("Hello World!");
-        let b = a;
-        f(b);
-        @f(b);@
-
-      ...
-    \end{lstlisting}
-  }
-  \end{onlyenv}
-
-  \begin{onlyenv}<5> {
-    \begin{lstlisting}[frame=single,style=base]
-      @error[E0382]@:
-      use of moved value: `b`
-    \end{lstlisting}
-  }
-  \end{onlyenv}
-
-  %_____________________________________________________________________________
-
-  \begin{onlyenv}<1-2,4> {
-    \begin{lstlisting}[frame=single,style=base]
-
-
+      extern "C" {
+        @fn get_value(data: *mut c_void) -> u32;@
+      }
     \end{lstlisting}
   }
   \end{onlyenv}
