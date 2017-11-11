@@ -1,0 +1,19 @@
+\begin{frame}{Rust - Traits}
+
+  \begin{itemize}
+    \item Ähneln Interfaces aus anderen Sprachen
+    \item Können Verhalten bezüglich Ownership und Move-Semantik beeinflussen
+    \item<2-> Drop
+      \begin{itemize}
+        \item Destruktor
+        \item drop()-Methode wird beim Verlassen des Geltungsbereichs aufgerufen
+        \item Verwendung zum Beispiel zur Schließung einer Netzwerkverbindung
+      \end{itemize}
+    \item<3-> Copy
+      \begin{itemize}
+        \item Erlaubt Copy-Semantik statt Move-Semantik
+        \item Jedes mal, wenn ein Move geschehen würde, wird eine bitweise Kopie ausgeführt
+        \item Primitive Datentypen wie i32 implementieren dieses Trait
+      \end{itemize}
+  \end{itemize}
+\end{frame}

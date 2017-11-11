@@ -105,7 +105,6 @@
       \item Sichere Speicherzugriffe ohne Garbage Collector
       \item Vermeidung undefinierten Verhaltens
       \item Effiziente und weniger fehleranfällige Parallelberechnung
-      \item Konzeptionell an C-artige Sprachen angelehnt
       \item Höhere Abstraktionen, um den Einstieg zu erleichtern
       \item Speichersicherheit und Abstraktionen sollen nicht
             auf Kosten der Leistung erreicht werden
@@ -139,26 +138,8 @@
 
 \input{move-ex.tex}
 \input{borrow-ex.tex}
+%\input{traits.tex}
 
-\begin{frame}{Rust - Traits}
-
-  \begin{itemize}
-    \item Ähneln Interfaces aus anderen Sprachen
-    \item Können Verhalten bezüglich Ownership und Move-Semantik beeinflussen
-    \item<2-> Drop
-      \begin{itemize}
-        \item Destruktor
-        \item drop()-Methode wird beim Verlassen des Geltungsbereichs aufgerufen
-        \item Verwendung zum Beispiel zur Schließung einer Netzwerkverbindung
-      \end{itemize}
-    \item<3-> Copy
-      \begin{itemize}
-        \item Erlaubt Copy-Semantik statt Move-Semantik
-        \item Jedes mal, wenn ein Move geschehen würde, wird eine bitweise Kopie ausgeführt
-        \item Primitive Datentypen wie i32 implementieren dieses Trait
-      \end{itemize}
-  \end{itemize}
-\end{frame}
 
 \begin{frame}{octorust}
 
@@ -190,7 +171,7 @@
     \end{itemize}
 \end{frame}
 
-\input{rust-c-bindings.tex}
+%\input{rust-c-bindings.tex}
 \input{invasive-example.tex}
 \input{eval.tex}
 
@@ -198,15 +179,16 @@
 \begin{frame}{Zusammenfassung und Fazit}
 
   \begin{itemize}
-    \item Mithilfe des invasiven Rechnens kann ressourcenbewusst programmiert werden
+    \item Invasives Rechnen ermöglicht ressourcenbewusstes Parallelrechnen
     \item Rust bietet Speichersicherheit ohne Garbage Collector
+    \item Rust schützt vor undefinertem Verhalten
+    \item octorust und octolib ermöglichen den Einsatz von Rust im invasiven Rechnen
     \item Rust weist in speicherintensiven Szenarien bessere Laufzeiten als X10 auf
-    \item Im Gegensatz zu C verhindert Rust undefiniertes Verhalten
   \end{itemize}
 
 \end{frame}
 
-\begin{frame}{Vielen Dank für ihre Aufmerksamkeit!}
+\begin{frame}{Vielen Dank für ihre Aufmerksamkeit}
   \begin{columns}[t]
     % convert -density 150 present.pdf -quality 90 build/output.png
     % Befehl vor make ausführen

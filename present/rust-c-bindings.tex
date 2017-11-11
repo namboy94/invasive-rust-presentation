@@ -3,7 +3,7 @@
   emptylines=100,
   breaklines=true,
   basicstyle=\ttfamily\color{black},
-  moredelim=**[is][\color{darkgreen}]{@}{@},
+  moredelim=**[is][\color{darkblue}]{@}{@},
 }
 
 
@@ -12,14 +12,12 @@
 \begin{frame}[fragile]{Rust Bindings zur OctoPOS/iRTSS C-Schnittstelle}
 
   \begin{lstlisting}[frame=single,style=base]
-    uint32_t get_value(void *data)
-  \end{lstlisting}
+    uint32_t get_value(void *data)\end{lstlisting}
 
   \begin{onlyenv}<1> {
     \begin{lstlisting}[frame=single,style=base]
       @extern crate libc;@
       @use libc::c_void;@
-
 
 
 
@@ -34,8 +32,7 @@
 
       @extern "C" {
 
-      }@
-    \end{lstlisting}
+      }@\end{lstlisting}
   }
   \end{onlyenv}
 
@@ -46,8 +43,7 @@
 
       extern "C" {
         @fn get_value(data: *mut c_void) -> u32;@
-      }
-    \end{lstlisting}
+      }\end{lstlisting}
   }
   \end{onlyenv}
 

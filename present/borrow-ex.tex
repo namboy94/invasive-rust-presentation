@@ -23,6 +23,8 @@
 
 
 
+
+
       ...\end{lstlisting}
   }
   \end{onlyenv}
@@ -35,6 +37,8 @@
       ...
         let mut x = String::from("Hello World!");
         let x_ref1 = &x;
+
+
 
 
 
@@ -51,6 +55,8 @@
         let mut x = String::from("Hello World!");
         let x_ref1 = &x;
         @let mut y = x;@
+
+
 
 
       ...\end{lstlisting}
@@ -75,6 +81,8 @@
         let x_ref2 = &x;
 
 
+
+
       ...\end{lstlisting}
   }
   \end{onlyenv}
@@ -86,8 +94,10 @@
       fn g(s: &mut String) { ... }
       ...
         let mut x = String::from("Hello World!");
-        let x_ref1 = &mut x;
+        let x_ref1 = &x;
         let x_ref2 = &x;
+        let x_ref3 = &mut x;
+
 
 
       ...\end{lstlisting}
@@ -101,8 +111,10 @@
       fn g(s: &mut String) { ... }
       ...
         let mut x = String::from("Hello World!");
-        let x_ref1 = &mut x;
-        @let x_ref2 = &mut x;@
+        let x_ref1 = &x;
+        let x_ref2 = &x;
+        let x_ref3 = &mut x;
+        @let x_ref4 = &mut x;@
 
 
       ...\end{lstlisting}
@@ -116,24 +128,9 @@
   }
   \end{onlyenv}
 
-  %-----------------------------------------------------------------------------
-
-  \begin{onlyenv}<7> {
-    \begin{lstlisting}[frame=single,style=base]
-      fn g(s: &mut String) { ... }
-      ...
-        let mut x = String::from("Hello World!");
-        g(&mut x);
-        g(&mut x);
-
-
-      ...\end{lstlisting}
-  }
-  \end{onlyenv}
-
   %_____________________________________________________________________________
 
-  \begin{onlyenv}<1,2,4,5,7> {
+  \begin{onlyenv}<1,2,4,5> {
     \begin{lstlisting}[frame=single,style=base]
 
     \end{lstlisting}
