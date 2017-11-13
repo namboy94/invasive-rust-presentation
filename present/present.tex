@@ -117,27 +117,28 @@
       \item<1-> Ownership
         \begin{itemize}
           \item Das zentrale Alleinstellungsmerkmal der Programmiersprache
-          \item Jeder Speicherbereich wird nur einer einzigen Variable zur Verfügung gestellt
+          \item Jeder Speicherbereich wird einer Variable exklusiv zur Verfügung gestellt
+          \item Affine Typen
           \item Beim Verlassen des Geltungsbereichs wird der Speicherbereich freigegeben
-          \item => Affine Typen
         \end{itemize}
       \item<2-> Move-Semantik
       \begin{itemize}
           \item Ownership kann auf andere Variablen übertragen werden
           \item Ursprüngliche Variable ist nach einem "`Move"' nicht mehr verwendbar
         \end{itemize}
-      \item<3-> Referenzen
+      \item<3-> Referenzen (Borrowing)
         \begin{itemize}
+          \item Erlauben Zugriff auf Speicherbereich einer anderen Variable
+          \item Move einer Variable nicht möglich wenn Referenzen existieren
           \item Unendliche unveränderliche Referenzen
           \item Nur eine veränderliche Referenz
-          \item Move einer Variable nicht möglich wenn Referenzen existieren
         \end{itemize}
     \end{itemize}
 
 \end{frame}
 
-\input{move-ex.tex}
-\input{borrow-ex.tex}
+%\input{move-ex.tex}
+%\input{borrow-ex.tex}
 %\input{traits.tex}
 
 
@@ -145,9 +146,9 @@
 
   \begin{itemize}
     \item Hilfsprogramm zum Kompilieren von invasiven Rust-Programmen
-    \item Unterstützt die x86 und SPARC-V8 Architekturen
     \item Automatische Verlinkung mit iRTSS/OctoPOS
     \item Automatisches Einbinden von octolib
+    \item Unterstützt die x86 und SPARC-V8 Architekturen
     \item ca. 650 Zeilen Code (Python)
   \end{itemize}
 
@@ -176,13 +177,13 @@
 \input{eval.tex}
 
 
-\begin{frame}{Zusammenfassung und Fazit}
+\begin{frame}{Zusammenfassung}
 
   \begin{itemize}
     \item Invasives Rechnen ermöglicht ressourcenbewusstes Parallelrechnen
+    \item octorust und octolib ermöglichen den Einsatz von Rust im invasiven Rechnen
     \item Rust bietet Speichersicherheit ohne Garbage Collector
     \item Rust schützt vor undefinertem Verhalten
-    \item octorust und octolib ermöglichen den Einsatz von Rust im invasiven Rechnen
     \item Rust weist in speicherintensiven Szenarien bessere Laufzeiten als X10 auf
   \end{itemize}
 
@@ -197,28 +198,18 @@
     \column{.4\textwidth}
       \centering
       \includegraphics[width=5cm,height=3.5cm]{build/output-6.png}
-      \includegraphics[width=5cm,height=3.5cm]{build/output-48.png}
+      \includegraphics[width=5cm,height=3.5cm]{build/output-30.png}
 
     \column{.4\textwidth}
       \centering
       \includegraphics[width=5cm,height=3.5cm]{build/output-10.png}
-      \includegraphics[width=5cm,height=3.5cm]{build/output-55.png}
+      \includegraphics[width=5cm,height=3.5cm]{build/output-37.png}
 
     \column{.1\textwidth}
   \end{columns}
 \end{frame}
 
 \end{document}
-
-% {
-% Roten Faden
-% AgentClaim etc zum ersten Beispiel zurückführen
-% Rust Invasiv Code Beispiel
-% }
-
-% Affine Typen
-
-% Erstes Rust Beispiel raus
 
 % Dependent types (Kann als Frage vorkommen) -X10 het's, Rust nicth, was verliert man dadurch?
 % In X10 nur halbherzig implementiert, werden kaum benutzt
