@@ -9,7 +9,7 @@ These are the Latex sources for the presentation of my
 ## Further Information
 
 * [Changelog](https://gitlab.namibsun.net/namboy94/invasive-rust-presentation/raw/master/CHANGELOG)
-* [License (GPLv3)](https://gitlab.namibsun.net/namboy94/invasive-rust-presentation/raw/master/LICENSE)
+* [License (CC BY-NC-ND 4.0)](https://gitlab.namibsun.net/namboy94/invasive-rust-presentation/raw/master/LICENSE)
 * [Gitlab](https://gitlab.namibsun.net/namboy94/invasive-rust-presentation)
 * [Github](https://github.com/namboy94/invasive-rust-presentation)
 * [Git Statistics (gitstats)](https://gitstats.namibsun.net/gitstats/invasive-rust-presentation/index.html)
